@@ -31,8 +31,6 @@ import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import android.content.Intent;
-import android.net.Uri;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -43,7 +41,6 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 public class MainActivity extends AppCompatActivity {
