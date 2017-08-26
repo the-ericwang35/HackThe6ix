@@ -84,12 +84,8 @@ public class MainActivity extends AppCompatActivity {
         takePictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (done) {
-                    done = false;
+                if (picNumber == 0) {
                     takePicture();
-                }
-                else {
-                    done = true;
                 }
             }
         });
@@ -140,11 +136,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
             super.onCaptureCompleted(session, request, result);
-            if (!done){
+            if (picNumber < 11){
                 takePicture();
             }
             else {
-                Toast.makeText(MainActivity.this, "Saved:" + file, Toast.LENGTH_SHORT).show();
+                picNumber = 0;
+                Toast.makeText(MainActivity.this, "Saved: " + picNumber + " Files", Toast.LENGTH_SHORT).show();
                 createCameraPreview();
             }
         }
@@ -234,11 +231,12 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
-                    if (!done){
+                    if (picNumber < 11){
                         takePicture();
                     }
                     else {
-                        Toast.makeText(MainActivity.this, "Saved:" + file, Toast.LENGTH_SHORT).show();
+                        picNumber = 0;
+                        Toast.makeText(MainActivity.this, "Saved: " + picNumber + " Files", Toast.LENGTH_SHORT).show();
                         createCameraPreview();
                     }
                 }
