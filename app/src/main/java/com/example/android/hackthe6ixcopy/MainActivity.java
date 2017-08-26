@@ -238,6 +238,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
                     if (!done){
+                        updatePreview();
                         takePicture();
                     }
                     else {
