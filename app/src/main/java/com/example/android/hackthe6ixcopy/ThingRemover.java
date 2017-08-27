@@ -39,25 +39,30 @@ public class ThingRemover {
             Mat tmp_aligned = new Mat();
             Imgproc.resize(image, tmp, tmp.size(), 0.15, 0.15, Imgproc.INTER_CUBIC);
             Imgproc.cvtColor(tmp, tmp_gray, Imgproc.COLOR_BGR2GRAY);
+            try {
+                Mat warp_matrix;
+                if (warp_mode == Video.MOTION_HOMOGRAPHY)
+                    warp_matrix = Mat.eye(3, 3, CvType.CV_32F);
+                else
+                    warp_matrix = Mat.eye(2, 3, CvType.CV_32F);
 
-            Mat warp_matrix;
-            if ( warp_mode == Video.MOTION_HOMOGRAPHY )
-                warp_matrix = Mat.eye(3, 3, CvType.CV_32F);
-            else
-                warp_matrix = Mat.eye(2, 3, CvType.CV_32F);
+                int number_of_iterations = 300;
 
-            int number_of_iterations = 300;
+                double termination_eps = 1e-5;
 
-            double termination_eps = 1e-5;
-
-            TermCriteria criteria = new TermCriteria(TermCriteria.COUNT+TermCriteria.EPS, number_of_iterations, termination_eps);
-            Video.findTransformECC(orig_gray, tmp_gray, warp_matrix, warp_mode, criteria, new Mat());
-            if (warp_mode != Video.MOTION_HOMOGRAPHY)
-                Imgproc.warpAffine(tmp, tmp_aligned, warp_matrix, orig_resized.size(), Imgproc.INTER_LINEAR + Imgproc.WARP_INVERSE_MAP);
-            else
-                // Use warpPerspective for Homography
-                Imgproc.warpPerspective(tmp, tmp_aligned, warp_matrix, orig_resized.size(), Imgproc.INTER_LINEAR + Imgproc.WARP_INVERSE_MAP);
-            results.add(tmp_aligned);
+                TermCriteria criteria = new TermCriteria(TermCriteria.COUNT + TermCriteria.EPS, number_of_iterations, termination_eps);
+                Video.findTransformECC(orig_gray, tmp_gray, warp_matrix, warp_mode, criteria, new Mat());
+                if (warp_mode != Video.MOTION_HOMOGRAPHY)
+                    Imgproc.warpAffine(tmp, tmp_aligned, warp_matrix, orig_resized.size(), Imgproc.INTER_LINEAR + Imgproc.WARP_INVERSE_MAP);
+                else
+                    // Use warpPerspective for Homography
+                    Imgproc.warpPerspective(tmp, tmp_aligned, warp_matrix, orig_resized.size(), Imgproc.INTER_LINEAR + Imgproc.WARP_INVERSE_MAP);
+                results.add(tmp_aligned);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                results.add(tmp);
+            }
         }
 
         return results;
