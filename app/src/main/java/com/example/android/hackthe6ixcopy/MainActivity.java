@@ -2,6 +2,7 @@ package com.example.android.hackthe6ixcopy;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
 import android.graphics.PixelFormat;
@@ -254,10 +255,7 @@ public class MainActivity extends AppCompatActivity {
                     else {
                         Toast.makeText(MainActivity.this, "Saved: " + picNumber + " Files", Toast.LENGTH_SHORT).show();
                         picNumber = 0;
-                        createCameraPreview();
-                        File folder = new File(Environment.getExternalStorageDirectory() + "/pics/");
-                        File output = new File(Environment.getExternalStorageDirectory() + "/pics/median.jpg");
-                        ThingRemover.process(Arrays.asList(folder.listFiles()), output);
+                        Intent startProcessing = new Intent(MainActivity.this, ImageProcessingActivity.class);
                     }
                 }
             };
