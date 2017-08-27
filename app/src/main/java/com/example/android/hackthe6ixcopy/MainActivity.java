@@ -33,6 +33,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import org.opencv.android.OpenCVLoader;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -53,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
     public int picNumber = 0;
 
     static {
+        if (!OpenCVLoader.initDebug()) {
+            Log.e(TAG, "OpenCV initialization failed");
+        }
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
         ORIENTATIONS.append(Surface.ROTATION_90, 0);
         ORIENTATIONS.append(Surface.ROTATION_180, 270);
@@ -202,7 +207,8 @@ public class MainActivity extends AppCompatActivity {
             // Orientation
             int rotation = getWindowManager().getDefaultDisplay().getRotation();
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
-            final File file = new File(Environment.getExternalStorageDirectory() + "/DCIM/Camera/pic" + picNumber + ".jpg");
+            new File(Environment.getExternalStorageDirectory() + "/pics/").mkdirs();
+            final File file = new File(Environment.getExternalStorageDirectory() + "/pics/pic" + picNumber + ".jpg");
             ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
                 @Override
                 public void onImageAvailable(ImageReader reader) {
@@ -249,6 +255,9 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Saved: " + picNumber + " Files", Toast.LENGTH_SHORT).show();
                         picNumber = 0;
                         createCameraPreview();
+                        File folder = new File(Environment.getExternalStorageDirectory() + "/pics/");
+                        File output = new File(Environment.getExternalStorageDirectory() + "/pics/median.jpg");
+                        MedianCalculator.process(Arrays.asList(folder.listFiles()), output);
                     }
                 }
             };
