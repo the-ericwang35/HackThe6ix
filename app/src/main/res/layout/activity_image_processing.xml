@@ -6,9 +6,8 @@
     android:orientation="vertical"
     tools:context="com.example.android.hackthe6ixcopy.ImageProcessingActivity">
 
-    <TextView
-        android:id="@+id/text"
+    <ImageView
+        android:id="@+id/median_image"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:text="Hello, image!"/>
+        android:layout_height="match_parent" />
 </RelativeLayout>

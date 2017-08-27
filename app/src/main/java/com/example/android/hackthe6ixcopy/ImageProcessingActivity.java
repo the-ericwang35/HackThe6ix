@@ -1,10 +1,12 @@
 package com.example.android.hackthe6ixcopy;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import java.io.File;
 import java.util.Arrays;
@@ -38,8 +40,15 @@ public class ImageProcessingActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            TextView text = (TextView) findViewById(R.id.text);
-            text.setText("done processing");
+            File imgFile = new File(Environment.getExternalStorageDirectory() + "/pics/median.jpg");
+            if (imgFile.exists()) {
+                Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                ImageView medianImage = (ImageView) findViewById(R.id.median_image);
+                medianImage.setImageBitmap(bitmap);
+            }
+
+
+
         }
     }
 }
