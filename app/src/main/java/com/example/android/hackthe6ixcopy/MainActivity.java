@@ -34,6 +34,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+
 import org.opencv.android.OpenCVLoader;
 
 import java.io.File;
@@ -382,6 +383,12 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         Log.e(TAG, "onResume");
         startBackgroundThread();
+
+        //Clear directory
+        File folder = new File(Environment.getExternalStorageDirectory() + "/pics/");
+        for(File child : folder.listFiles())
+            child.delete();
+
         if (textureView.isAvailable()) {
             openCamera();
         } else {
