@@ -5,19 +5,39 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.android.hackthe6ixcopy.MainActivity">
+
+
     <TextureView
         android:id="@+id/texture"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_takepicture"
-        android:layout_alignParentTop="true"/>
-    <Button
-        android:id="@+id/btn_takepicture"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true" />
+    
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/take_picture" />
+        android:layout_centerHorizontal="true">
+
+
+        <ImageButton
+            android:id="@+id/btn_takepicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:maxHeight="80dp"
+            android:maxWidth="80dp"
+            android:src="@drawable/image_capture_icon"
+            android:background="@null"/>
+
+
+
+
+    </RelativeLayout>
+
+
+
+
 </RelativeLayout>
