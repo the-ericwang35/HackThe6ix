@@ -49,7 +49,7 @@ public class ThingRemover {
             else
                 warp_matrix = Mat.eye(2, 3, CvType.CV_32F);
 
-            int number_of_iterations = 5000;
+            int number_of_iterations = 300;
 
             double termination_eps = 1e-10;
 
