@@ -257,7 +257,7 @@ public class MainActivity extends AppCompatActivity {
                         createCameraPreview();
                         File folder = new File(Environment.getExternalStorageDirectory() + "/pics/");
                         File output = new File(Environment.getExternalStorageDirectory() + "/pics/median.jpg");
-                        MedianCalculator.process(Arrays.asList(folder.listFiles()), output);
+                        ThingRemover.process(Arrays.asList(folder.listFiles()), output);
                     }
                 }
             };
