@@ -204,7 +204,8 @@ public class MainActivity extends AppCompatActivity {
             // Orientation
             int rotation = getWindowManager().getDefaultDisplay().getRotation();
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
-            final File file = new File(Environment.getExternalStorageDirectory() + "/DCIM/Camera/pic" + picNumber + ".jpg");
+            new File(Environment.getExternalStorageDirectory() + "/pics/").mkdirs();
+            final File file = new File(Environment.getExternalStorageDirectory() + "/pics/pic" + picNumber + ".jpg");
             ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
                 @Override
                 public void onImageAvailable(ImageReader reader) {
@@ -250,6 +251,9 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Saved: " + picNumber + " Files", Toast.LENGTH_SHORT).show();
                         picNumber = 0;
                         createCameraPreview();
+                        File folder = new File(Environment.getExternalStorageDirectory() + "/pics/");
+                        File output = new File(Environment.getExternalStorageDirectory() + "/pics/median.jpg");
+                        MedianCalculator.process(Arrays.asList(folder.listFiles()), output);
                     }
                 }
             };

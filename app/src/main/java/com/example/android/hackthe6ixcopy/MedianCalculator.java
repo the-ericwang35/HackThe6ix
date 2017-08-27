@@ -23,31 +23,33 @@ public class MedianCalculator {
         return new ArrayList<>();
     }
 
-    public static void process(List<File> imageFiles) {
+    public static void process(List<File> imageFiles, File output) {
         List<Mat> images = new ArrayList<>();
         Mat tmp;
         for (File file : imageFiles) {
             try {
                 tmp = Imgcodecs.imread(file.getPath());
                 images.add(tmp);
+                Log.d(TAG, file.getPath());
             }
             catch(UnsatisfiedLinkError e) {
                 e.printStackTrace();
             }
         }
         Mat med = median(images);
-        String outputName = "result.jpg";
-        Imgcodecs.imwrite(outputName, med);
+        Log.d(TAG, Boolean.toString(Imgcodecs.imwrite(output.toString(), med)));
     }
 
     public static Mat median(List<Mat> images) {
-        Mat tmp = null;
+        Mat[] imgArray = new Mat[images.size()];
+        imgArray = images.toArray(imgArray);
+        Mat tmp = imgArray[0];
         // We will sorting pixels where the first mat will get the lowest pixels and the last one, the highest
         for(int i = 0; i < images.size(); i++) {
             for(int j = i + 1; j < images.size(); j++) {
-                images.get(i).copyTo(tmp);
-                Core.min(images.get(i), images.get(j), images.get(i));
-                Core.max(images.get(j), tmp, images.get(j));
+                imgArray[i].copyTo(tmp);
+                Core.min(imgArray[i], imgArray[j], imgArray[i]);
+                Core.max(imgArray[j], tmp, imgArray[j]);
             }
         }
         // We get the median
@@ -57,6 +59,6 @@ public class MedianCalculator {
 
     public static void main(String[] args) {
         List<File> files = Arrays.asList(new File(System.getProperty("user.dir") + "/input").listFiles());
-        process(files);
+        //process(files);
     }
 }
