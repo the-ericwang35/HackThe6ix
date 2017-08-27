@@ -1,18 +1,15 @@
 package com.example.android.hackthe6ixcopy;
 import android.util.Log;
 
+import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
-import org.opencv.core.Core;
 import org.opencv.core.TermCriteria;
-import org.opencv.video.Video;
-import org.opencv.core.MatOfRect;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
+import org.opencv.video.Video;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

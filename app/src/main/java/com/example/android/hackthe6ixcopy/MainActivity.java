@@ -253,9 +253,10 @@ public class MainActivity extends AppCompatActivity {
                         takePhoto = true;
                     }
                     else {
-                        Toast.makeText(MainActivity.this, "Saved: " + picNumber + " Files", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "Saved: " + picNumber + " Files", Toast.LENGTH_SHORT).show();
                         picNumber = 0;
                         Intent startProcessing = new Intent(MainActivity.this, ImageProcessingActivity.class);
+                        startActivity(startProcessing);
                     }
                 }
             };
