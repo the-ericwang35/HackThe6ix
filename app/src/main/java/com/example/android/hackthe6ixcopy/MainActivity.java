@@ -34,6 +34,8 @@ import android.widget.Toast;
 import android.content.Intent;
 import android.net.Uri;
 
+import org.opencv.android.OpenCVLoader;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -55,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
     public int picNumber = 0;
 
     static {
+        if (!OpenCVLoader.initDebug()) {
+            Log.e(TAG, "OpenCV initialization failed");
+        }
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
         ORIENTATIONS.append(Surface.ROTATION_90, 0);
         ORIENTATIONS.append(Surface.ROTATION_180, 270);
