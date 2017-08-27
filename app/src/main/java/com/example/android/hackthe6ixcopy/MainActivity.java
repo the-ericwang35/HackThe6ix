@@ -29,7 +29,7 @@ import android.util.SparseIntArray;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.io.File;
@@ -41,13 +41,12 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "AndroidCameraApi";
-    private Button takePictureButton;
+    private ImageButton takePictureButton;
     private TextureView textureView;
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
     public int picNumber = 0;
@@ -80,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         textureView = (TextureView) findViewById(R.id.texture);
         assert textureView != null;
         textureView.setSurfaceTextureListener(textureListener);
-        takePictureButton = (Button) findViewById(R.id.btn_takepicture);
+        takePictureButton = (ImageButton) findViewById(R.id.btn_takepicture);
         assert takePictureButton != null;
         takePictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,10 +87,10 @@ public class MainActivity extends AppCompatActivity {
                 if (done) {
                     done = false;
                     takePicture();
-                    takePictureButton.setText("Stop");
+                    takePictureButton.setImageResource(R.drawable.icon_record_stop);
                 }
                 else {
-                    takePictureButton.setText("Start");
+                    takePictureButton.setImageResource(R.drawable.image_capture_icon);
                     done = true;
                 }
             }
