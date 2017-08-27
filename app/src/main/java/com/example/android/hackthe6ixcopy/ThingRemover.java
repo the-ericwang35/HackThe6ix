@@ -82,7 +82,8 @@ public class ThingRemover {
             }
         }
 
-        Mat med = median(stabilize(images));
+        //images = stabilize(images);
+        Mat med = median(images);
         Log.d(TAG, Boolean.toString(Imgcodecs.imwrite(output.toString(), med)));
     }
 
