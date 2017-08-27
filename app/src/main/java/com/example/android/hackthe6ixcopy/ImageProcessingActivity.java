@@ -6,7 +6,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import java.io.File;
 import java.util.Arrays;
@@ -36,6 +38,7 @@ public class ImageProcessingActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
+
         }
 
         @Override
@@ -44,6 +47,9 @@ public class ImageProcessingActivity extends AppCompatActivity {
             if (imgFile.exists()) {
                 Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 ImageView medianImage = (ImageView) findViewById(R.id.median_image);
+                ProgressBar progressBar = (ProgressBar) findViewById(R.id.loading_indicator);
+                progressBar.setVisibility(View.INVISIBLE);
+                medianImage.setVisibility(View.VISIBLE);
                 medianImage.setImageBitmap(bitmap);
             }
 
