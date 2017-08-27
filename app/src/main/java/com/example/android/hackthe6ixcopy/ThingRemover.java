@@ -48,7 +48,7 @@ public class ThingRemover {
 
             int number_of_iterations = 300;
 
-            double termination_eps = 1e-10;
+            double termination_eps = 1e-5;
 
             TermCriteria criteria = new TermCriteria(TermCriteria.COUNT+TermCriteria.EPS, number_of_iterations, termination_eps);
             Video.findTransformECC(orig_gray, tmp_gray, warp_matrix, warp_mode, criteria, new Mat());
