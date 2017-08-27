@@ -41,6 +41,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -239,13 +240,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
                     if (!done){
-                        try {
-                            TimeUnit.SECONDS.sleep(1);
-                            takePicture();
-                        }
-                        catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        takePicture();
                     }
                     else {
                         Toast.makeText(MainActivity.this, "Saved: " + picNumber + " Files", Toast.LENGTH_SHORT).show();
