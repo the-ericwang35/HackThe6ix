@@ -84,8 +84,14 @@ public class MainActivity extends AppCompatActivity {
         takePictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (picNumber == 0) {
+                if (done) {
+                    done = false;
                     takePicture();
+                    takePictureButton.setText("Stop");
+                }
+                else {
+                    takePictureButton.setText("Start");
+                    done = true;
                 }
             }
         });
@@ -136,12 +142,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
             super.onCaptureCompleted(session, request, result);
-            if (picNumber < 11){
-                takePicture();
+            // THIS IS NOT USED
+            if (!done){
+                    takePicture();
             }
             else {
-                picNumber = 0;
                 Toast.makeText(MainActivity.this, "Saved: " + picNumber + " Files", Toast.LENGTH_SHORT).show();
+                picNumber = 0;
                 createCameraPreview();
             }
         }
@@ -231,12 +238,18 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
-                    if (picNumber < 11){
-                        takePicture();
+                    if (!done){
+                        try {
+                            TimeUnit.SECONDS.sleep(1);
+                            takePicture();
+                        }
+                        catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                     else {
-                        picNumber = 0;
                         Toast.makeText(MainActivity.this, "Saved: " + picNumber + " Files", Toast.LENGTH_SHORT).show();
+                        picNumber = 0;
                         createCameraPreview();
                     }
                 }
