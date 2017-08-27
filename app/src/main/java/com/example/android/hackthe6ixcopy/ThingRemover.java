@@ -33,10 +33,10 @@ public class ThingRemover {
         results.add(orig_resized);
 
         int warp_mode = Video.MOTION_EUCLIDEAN;
-        Mat tmp = new Mat();
-        Mat tmp_gray = new Mat();
-        Mat tmp_aligned = new Mat();
         for (Mat image : images) {
+            Mat tmp = new Mat();
+            Mat tmp_gray = new Mat();
+            Mat tmp_aligned = new Mat();
             Imgproc.resize(image, tmp, tmp.size(), 0.15, 0.15, Imgproc.INTER_CUBIC);
             Imgproc.cvtColor(tmp, tmp_gray, Imgproc.COLOR_BGR2GRAY);
 
