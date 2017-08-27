@@ -20,9 +20,6 @@ public class ImageProcessingActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         
-        File folder = new File(Environment.getExternalStorageDirectory() + "/pics/");
-        File output = new File(Environment.getExternalStorageDirectory() + "/pics/median.jpg");
-        ThingRemover.process(Arrays.asList(folder.listFiles()), output);
         TextView text = (TextView) findViewById(R.id.text);
         text.setText("done processing");
     }
