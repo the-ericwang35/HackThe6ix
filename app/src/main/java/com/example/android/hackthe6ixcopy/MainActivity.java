@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
+import android.graphics.PixelFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
     private Handler mBackgroundHandler;
     private HandlerThread mBackgroundThread;
     private boolean done = true;
+    private boolean takePhoto = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         textureView.setSurfaceTextureListener(textureListener);
         takePictureButton = (ImageButton) findViewById(R.id.btn_takepicture);
         assert takePictureButton != null;
+        getWindow().setFormat(PixelFormat.UNKNOWN);
         takePictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -239,7 +242,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
                     if (!done){
-                        takePicture();
+                        createCameraPreview();
+                        takePhoto = true;
                     }
                     else {
                         Toast.makeText(MainActivity.this, "Saved: " + picNumber + " Files", Toast.LENGTH_SHORT).show();
@@ -286,6 +290,18 @@ public class MainActivity extends AppCompatActivity {
                     // When the session is ready, we start displaying the preview.
                     cameraCaptureSessions = cameraCaptureSession;
                     updatePreview();
+
+                    if(takePhoto)
+                    {
+                        try {
+                            Thread.sleep(2000);
+                            takePhoto = false;
+                            takePicture();
+                        }
+                        catch(InterruptedException e){
+                            e.printStackTrace();
+                        }
+                    }
                 }
 
                 @Override
