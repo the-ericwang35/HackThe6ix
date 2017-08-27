@@ -10,7 +10,8 @@
         android:id="@+id/median_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible"/>
+        android:background="@android:color/background_dark"
+        android:visibility="invisible" />
 
     <RelativeLayout
         android:layout_width="wrap_content"

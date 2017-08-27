@@ -1,15 +1,17 @@
 package com.example.android.hackthe6ixcopy;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-
 import java.io.File;
 import java.util.Arrays;
 
@@ -33,6 +35,8 @@ public class ImageProcessingActivity extends AppCompatActivity {
             File folder = new File(Environment.getExternalStorageDirectory() + "/pics/");
             File output = new File(Environment.getExternalStorageDirectory() + "/pics/median.jpg");
             ThingRemover.process(Arrays.asList(folder.listFiles()), output);
+            String result = Environment.getExternalStorageDirectory() + "/pics/median.jpg";
+            addImageToGallery(result, ImageProcessingActivity.this);
             return null;
         }
 
@@ -55,6 +59,17 @@ public class ImageProcessingActivity extends AppCompatActivity {
 
 
 
+        }
+
+        public void addImageToGallery(final String filePath, final Context context) {
+
+            ContentValues values = new ContentValues();
+
+            values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
+            values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+            values.put(MediaStore.MediaColumns.DATA, filePath);
+
+            context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
         }
     }
 }
