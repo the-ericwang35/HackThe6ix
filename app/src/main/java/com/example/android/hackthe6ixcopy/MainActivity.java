@@ -386,8 +386,10 @@ public class MainActivity extends AppCompatActivity {
 
         //Clear directory
         File folder = new File(Environment.getExternalStorageDirectory() + "/pics/");
-        for(File child : folder.listFiles())
-            child.delete();
+        if (folder.listFiles() != null) {
+            for (File child : folder.listFiles())
+                child.delete();
+        }
 
         if (textureView.isAvailable()) {
             openCamera();
