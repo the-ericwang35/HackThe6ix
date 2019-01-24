@@ -2,4 +2,6 @@
     <string name="app_name">Removio</string>
     <string name="take_picture">Start</string>
     <string name="title_activity_image_processing">Processing Image</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
 </resources>
