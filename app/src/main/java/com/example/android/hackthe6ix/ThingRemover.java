@@ -1,4 +1,4 @@
-package com.example.android.hackthe6ixcopy;
+package com.example.android.hackthe6ix;
 import android.util.Log;
 
 import org.opencv.core.Core;
@@ -20,9 +20,8 @@ import java.util.List;
 
 public class ThingRemover {
     private static final String TAG = "OpenCVMedianCalculator";
-    public static List<Mat> stabilize(List<Mat> images) {
-        // orig = cv2.imread(file_paths[1])
-        // orig = cv2.resize(orig, None, fx=0.14, fy=0.14)
+    private static List<Mat> stabilize(List<Mat> images) {
+
         List<Mat> results = new ArrayList<>();
 
         Mat orig = images.get(0);
@@ -68,7 +67,7 @@ public class ThingRemover {
         return results;
     }
 
-    public static void process(List<File> imageFiles, File output) {
+    static void process(List<File> imageFiles, File output) {
         List<Mat> images = new ArrayList<>();
         Mat tmp;
         for (File file : imageFiles) {
@@ -87,7 +86,7 @@ public class ThingRemover {
         Log.d(TAG, Boolean.toString(Imgcodecs.imwrite(output.toString(), med)));
     }
 
-    public static Mat median(List<Mat> images) {
+    private static Mat median(List<Mat> images) {
         Mat[] imgArray = new Mat[images.size()];
         imgArray = images.toArray(imgArray);
         Mat tmp = imgArray[0];

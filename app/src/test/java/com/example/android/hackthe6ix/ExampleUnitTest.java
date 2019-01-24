@@ -1,4 +1,4 @@
-package com.example.android.hackthe6ixcopy;
+package com.example.android.hackthe6ix;
 
 import org.junit.Test;
 

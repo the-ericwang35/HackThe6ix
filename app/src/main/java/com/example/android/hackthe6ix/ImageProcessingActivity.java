@@ -1,4 +1,4 @@
-package com.example.android.hackthe6ixcopy;
+package com.example.android.hackthe6ix;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -26,12 +26,24 @@ public class ImageProcessingActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        new ProcessImagesTask().execute(0); //0 is a placeholder
+        new ProcessImagesTask().execute();
     }
 
-    class ProcessImagesTask extends AsyncTask<Integer, Void, Void> {
+    void addImageToGallery(final String filePath, final Context context) {
+
+        ContentValues values = new ContentValues();
+
+        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+        values.put(MediaStore.MediaColumns.DATA, filePath);
+
+        context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+    }
+
+
+    class ProcessImagesTask extends AsyncTask<Void, Void, Void> {
         @Override
-        protected Void doInBackground(Integer...params){
+        protected Void doInBackground(Void...params){
             File folder = new File(Environment.getExternalStorageDirectory() + "/pics/");
             File output = new File(Environment.getExternalStorageDirectory() + "/pics/median.jpg");
             ThingRemover.process(Arrays.asList(folder.listFiles()), output);
@@ -56,20 +68,8 @@ public class ImageProcessingActivity extends AppCompatActivity {
                 medianImage.setVisibility(View.VISIBLE);
                 medianImage.setImageBitmap(bitmap);
             }
-
-
-
         }
 
-        public void addImageToGallery(final String filePath, final Context context) {
 
-            ContentValues values = new ContentValues();
-
-            values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
-            values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
-            values.put(MediaStore.MediaColumns.DATA, filePath);
-
-            context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-        }
     }
 }

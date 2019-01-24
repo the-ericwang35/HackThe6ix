@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.android.hackthe6ixcopy">
+    package="com.example.android.hackthe6ix">
 
     <uses-sdk
         android:minSdkVersion="21"
@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.android.hackthe6ix.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,13 +31,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ImageProcessingActivity"
+            android:name="com.example.android.hackthe6ix.ImageProcessingActivity"
             android:label="@string/title_activity_image_processing"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.example.android.hackthe6ix.MainActivity"
             android:theme="@style/Theme.AppCompat">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.hackthe6ixcopy.MainActivity" />
+                android:value="com.example.android.hackthe6ix.MainActivity" />
         </activity>
     </application>
 

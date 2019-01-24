@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.android.hackthe6ixcopy.MainActivity">
+    tools:context="com.example.android.hackthe6ix.MainActivity">
 
 
     <TextureView
